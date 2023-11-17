@@ -34,14 +34,17 @@ const SignInForm = () => {
     },
   });
 
-  const onSubmit = async (values: z.infer<typeof FormSchema>,e:any) => {
+  const onSubmit = async (values: z.infer<typeof FormSchema>, e: any) => {
     e.preventDefault();
-
-    const signInData = await signIn("credentials", {
-      email: values.email,
-      password: values.password,
-    });
-    console.log(signInData);
+    try {
+      const signInData = await signIn("credentials", {
+        email: values.email,
+        password: values.password,
+      });
+      console.log(signInData);
+    } catch (error) {
+      console.error("Sign-in error:", error);
+    }
   };
 
   return (
